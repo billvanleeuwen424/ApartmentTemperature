@@ -1,0 +1,43 @@
+to run this program, you need to use python3
+
+steps
+
+1. plug the bme280 into the rpi. vin to 3v3, sda and scl, grnd
+2. enable i2c in rasp-config
+3. pip3 install adafruit-circuitpython-bme280
+4. pip3 install pytz
+5. pip3 install mysql-connector-python
+
+use:
+sudo i2cdetect -y 1
+to find the port for the bme280
+
+
+
+put the sql connector file and the script into the home folder
+
+use cron to run the file every 30 minutes * 30 * * * /usr/bin/python3 /home/pi/bme280_Script.py
+
+
+
+
+
+### What I've learned/used in this proect before I forget
+
+I2C communication
+
+Raspberry Pi
+
+Linux, terminal
+
+SSH
+
+FTP
+
+PHP
+
+Python
+
+Apache
+
+HTTPS
