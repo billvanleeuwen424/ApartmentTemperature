@@ -22,13 +22,15 @@ use cron to run the file every 30 minutes * 30 * * * /usr/bin/python3 /home/pi/b
 
 
 
-### What I've learned/used in this proect before I forget
+### What I've learned/used in this project before I forget
 
 I2C communication
 
 Raspberry Pi
 
 Linux, terminal
+
+crontab
 
 SSH
 
@@ -40,4 +42,15 @@ Python
 
 Apache
 
-HTTPS
+- administering own test server
+- running php on server
+- linux terminal for troubleshooting
+  - PDO wouldnt connect
+  - apache was acting up
+  - updating software etc
+
+SQL
+
+- inserting temp data into mysql DB
+
+- Connecting to DB to get temp data
