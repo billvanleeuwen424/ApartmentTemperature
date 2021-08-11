@@ -1,7 +1,7 @@
 <?php 
 
 //connect to DB
-require "includes/connectDB.php";
+require "libraries/connectDB.php";
 $pdo = connectDB();
 
 $query = "SELECT * FROM temperature_data WHERE date = CURDATE() ORDER BY time DESC LIMIT 1";

@@ -21,7 +21,7 @@ bme280 = basic.Adafruit_BME280_I2C(i2c, address=0x76)
 #calls function in the connectDB module
 mydb = connectDB.connection()
 mycursor = mydb.cursor()
-query = "INSERT INTO `temperature_data` (temperature, humidity, date, time) VALUES (%s,%s,%s,%s)"
+query = "INSERT INTO temperature_data (temperature, humidity, date, time) VALUES (%s,%s,%s,%s)"
 
 #get temp and humidity from sensor
 temperature = round(bme280.temperature, 1)
