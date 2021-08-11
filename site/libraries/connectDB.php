@@ -2,7 +2,7 @@
 
 function connectDB(){
     
-    $ini = parse_ini_file("../../DB.ini");
+    $ini = parse_ini_file("../../temperature/DB.ini");
 
     $user = $ini['user'];
     $password = $ini['password'];
