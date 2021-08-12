@@ -1,6 +1,6 @@
 <?php 
 
-//connect to DB
+//get room temp from DB
 require "libraries/connectDB.php";
 $pdo = connectDB();
 
@@ -8,10 +8,28 @@ $query = "SELECT * FROM temperature_data WHERE date = CURDATE() ORDER BY time DE
 $stmt = $pdo->query($query);
 $row = $stmt->fetch();
 
-$time = $row['time'];
-$humidity = $row['humidity'];
-$temp = $row['temperature'];
+$insideTime = $row['time'];
+$insideHumidity = $row['humidity'];
+$insideTemp = $row['temperature'];
 
+
+//get current temperature
+$currentWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=44.30&lon=-78.31&exclude=minutely,hourly,daily,alerts&appid=587f971d7e4668e59ca8c244f16be3d5';
+$chCurrent = curl_init($currentWeatherApiUrl);
+curl_setopt($chCurrent, CURLOPT_RETURNTRANSFER, True);
+$currentData = curl_exec($chCurrent);
+curl_close($chCurrent);
+
+//decode JSON and objects within
+$currentData = json_decode($currentData);
+$currentData = get_object_vars($currentData);
+$currentData = get_object_vars($currentData['current']);
+
+$outsideTemp = $currentData['temp'];
+$outsideHumidity = $currentData['humidity'];
+//convert from kelvin to celcius
+$outsideTemp -= 273.15;
+$outsideTemp = round($outsideTemp);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +40,18 @@ $temp = $row['temperature'];
     <title>Raspberry Pi Temperature</title>
 </head>
 <body>
-    <p><?=$time?></p>
-    <p><?=$humidity?></p>
-    <p><?=$temp?></p>
+    <div>
+        <p>Time of Data: <?=$insideTime?></p>
+    </div>
+    <div>
+        <p>Room Climate</p>
+        <p>Indoor humidity: <?=$insideHumidity?></p>
+        <p>Indoor Temperature: <?=$insideTemp?></p>
+    </div>
+    <div>
+        <p>Outer Climate</p>
+        <p>Outdoor humidity: <?=$outsideHumidity?></p>
+        <p>Outdoor temperature: <?=$outsideTemp?></p>
+    </div>
 </body>
 </html>
