@@ -13,8 +13,11 @@ $insideHumidity = $row['humidity'];
 $insideTemp = $row['temperature'];
 
 
+$ini = parse_ini_file("../../temperature/api.ini");
+$currentKey = $ini['openweathercurrent'];
+
 //get current temperature
-$currentWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=44.30&lon=-78.31&exclude=minutely,hourly,daily,alerts&appid=587f971d7e4668e59ca8c244f16be3d5';
+$currentWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=44.30&lon=-78.31&exclude=minutely,hourly,daily,alerts&appid=' . $currentKey;
 $chCurrent = curl_init($currentWeatherApiUrl);
 curl_setopt($chCurrent, CURLOPT_RETURNTRANSFER, True);
 $currentData = curl_exec($chCurrent);
