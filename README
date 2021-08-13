@@ -52,6 +52,5 @@ Apache
 SQL
 
 - inserting temp data into mysql DB
-- Connecting to DB to get temp data
 
-interactinng with API to get weather data
+- Connecting to DB to get temp data
