@@ -1,38 +1,15 @@
 <?php 
+require "libraries/getData.php";
+$insideData = currentIndoor();
+$outsideData = currentOutdoor();
 
-//get room temp from DB
-require "libraries/connectDB.php";
-$pdo = connectDB();
+//get temps from data arrays
+$insideTemp = $insideData[0];
+$outsideTemp = $outsideData[0];
 
-$query = "SELECT * FROM temperature_data WHERE date = CURDATE() ORDER BY time DESC LIMIT 1";
-$stmt = $pdo->query($query);
-$row = $stmt->fetch();
-
-$insideTime = $row['time'];
-$insideHumidity = $row['humidity'];
-$insideTemp = $row['temperature'];
-
-
-$ini = parse_ini_file("../../temperature/api.ini");
-$currentKey = $ini['openweathercurrent'];
-
-//get current temperature
-$currentWeatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=44.30&lon=-78.31&exclude=minutely,hourly,daily,alerts&appid=' . $currentKey;
-$chCurrent = curl_init($currentWeatherApiUrl);
-curl_setopt($chCurrent, CURLOPT_RETURNTRANSFER, True);
-$currentData = curl_exec($chCurrent);
-curl_close($chCurrent);
-
-//decode JSON and objects within
-$currentData = json_decode($currentData);
-$currentData = get_object_vars($currentData);
-$currentData = get_object_vars($currentData['current']);
-
-$outsideTemp = $currentData['temp'];
-$outsideHumidity = $currentData['humidity'];
-//convert from kelvin to celcius
-$outsideTemp -= 273.15;
-$outsideTemp = round($outsideTemp);
+//get humidity from data arrays
+$insideHumidity = $insideData[1];
+$outsideHumidity = $outsideData[1];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,13 +30,13 @@ $outsideTemp = round($outsideTemp);
         <div class="gridCont">
             <div class="pure-g">
                 <div class="pure-u-1">
-                    <p>Time of Data: <?=$insideTime?></p>
+                    <p>Time of Data:</p>
                 </div>
             </div>
             <div class="pure-g">
                 <div class="pure-u-1 pure-u-md-1-2">
                     <div class="l-box">
-                        <p>Room Climate</p>
+                        <span class="boxTitle">Room Climate</span>
                         <div class='pure-g'>
                             <div class='pure-u-2'>
                                 <div class="pure-g">
@@ -84,7 +61,7 @@ $outsideTemp = round($outsideTemp);
                 </div>
                 <div class="pure-u-1 pure-u-md-1-2">
                     <div class="l-box">
-                        <p>Outer Climate</p>
+                        <span class="boxTitle">Outer Climate</span>
                         <div class="pure-g">
                             <div class='pure-u-2'>
                                 <div class="pure-g">
