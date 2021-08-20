@@ -40,21 +40,75 @@ $outsideTemp = round($outsideTemp);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--pure.css-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--My stylesheet-->
+    <link rel="stylesheet" href="styles/master.css"/>
     <title>Raspberry Pi Temperature</title>
 </head>
 <body>
-    <div>
-        <p>Time of Data: <?=$insideTime?></p>
-    </div>
-    <div>
-        <p>Room Climate</p>
-        <p>Indoor humidity: <?=$insideHumidity?></p>
-        <p>Indoor Temperature: <?=$insideTemp?></p>
-    </div>
-    <div>
-        <p>Outer Climate</p>
-        <p>Outdoor humidity: <?=$outsideHumidity?></p>
-        <p>Outdoor temperature: <?=$outsideTemp?></p>
-    </div>
+    <main>
+        <div class="gridCont">
+            <div class="pure-g">
+                <div class="pure-u-1">
+                    <p>Time of Data: <?=$insideTime?></p>
+                </div>
+            </div>
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <div class="l-box">
+                        <p>Room Climate</p>
+                        <div class='pure-g'>
+                            <div class='pure-u-2'>
+                                <div class="pure-g">
+                                    <div class="pure-u-2"><span class='unitText'>Temperature: </span></div>
+                                    <div class="pure-u-2">
+                                        <span class='temp'><?=$insideTemp?></span>
+                                        <span class='units'>°C</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='pure-u-2'>
+                                <div class="pure-g">
+                                    <div class="pure-u-2"><span class='unitText'>Humidity: </span></div>
+                                    <div class="pure-u-2">
+                                        <span class='hum'><?=$insideHumidity?></span>
+                                        <span class='units'>%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <div class="l-box">
+                        <p>Outer Climate</p>
+                        <div class="pure-g">
+                            <div class='pure-u-2'>
+                                <div class="pure-g">
+                                    <div class="pure-u-2"><span class='unitText'>Temperature: </span></div>
+                                    <div class="pure-u-2">
+                                        <span class='temp'><?=$outsideTemp?></span>
+                                        <span class='units'>°C</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='pure-u-2'>
+                                <div class="pure-g">
+                                    <div class="pure-u-2"><span class='unitText'>Humidity: </span></div>
+                                    <div class="pure-u-2">
+                                        <span class='hum'><?=$outsideHumidity?></span>
+                                        <span class='units'>%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

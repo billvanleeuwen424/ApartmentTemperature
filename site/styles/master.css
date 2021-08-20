@@ -1,0 +1,41 @@
+@import 'reset.css';
+
+.pure-g, .pure-u{
+    letter-spacing: normal;
+}
+main {
+    margin: 10em;
+}
+
+/*the boxes themselves*/
+.l-box {
+    border: 1px solid rgba(65, 61, 61, 0.2);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
+    margin: 1em;
+    padding: 2em;
+    min-width: 9em;
+}
+/*the flex container directly inside of the box*/
+div.l-box > div.pure-g {
+    justify-content: space-evenly;
+}
+
+.temp, .hum {
+    font-size: 4.2em;
+}
+.units {
+    font-size: 3em;
+}
+
+/*'humidity' and 'temperature' text*/
+span.unitText {
+    display: block;
+    width: 7em;
+    text-align: right;
+}
+
+/*the div containing the temp and unit. e.g. 23°C or 45%*/
+div.l-box > div.pure-g > div.pure-u-2 > div.pure-g > div.pure-u-2{
+width: 8.5em;
+}
