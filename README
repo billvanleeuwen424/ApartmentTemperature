@@ -1,67 +1,17 @@
-to run this program, you need to use python3
+#My Apartment Temperature Project
 
-steps
+##Intro
+This is one of my first ever side projects. for as long as I can remember I have been interested in Raspberry Pi's. I enjoy building programs to interface between the real and digital worlds; this project is no exception.
 
-1. plug the bme280 into the rpi. vin to 3v3, sda and scl, grnd
-2. enable i2c in rasp-config
-3. pip3 install adafruit-circuitpython-bme280
-4. pip3 install pytz
-5. pip3 install mysql-connector-python
+##Description
+The files located in the pi-files directory are running on a Raspberry Pi Zero with a BME280 sensro in my apartment. This Python code uses the adafruit library to read values from the sensor using the I2C protocol, and inserts that data into a MySQL database running on my webserver.
 
-use:
-sudo i2cdetect -y 1
-to find the port for the bme280
+The site directory contains the HTML/CSS and PHP that runs on the webserver. This PHP code gets the most recent temperature and humidity data from the database, as well as pinging the Open Weather API to get local temperature data.
 
-
-
-put the sql connector file and the script into the home folder
-
-use cron to run the file every 30 minutes * 30 * * * /usr/bin/python3 /home/pi/bme280_Script.py
-
-
-
-
-
-### What I've learned/used in this project before I forget
-
-I2C communication
-
-Raspberry Pi
-
-Linux, terminal
-
-crontab
-
-SSH
-
-FTP
-
-PHP
-
-Python
-
-Apache
-
-- administering own test server
-- running php on server
-- linux terminal for troubleshooting
-  - PDO wouldnt connect
-  - apache was acting up
-  - updating software etc
-
-SQL
-
-- inserting temp data into mysql DB
-- Connecting to DB to get temp data
-
-PureCSS Framework
-
-- responsive grid design
-
-
-
-
-
-## Challenges I had with this project
-
-I suck at css, responsive design specifically
+##Technologies Used
+- Python
+- PHP
+- Linux
+- External API
+- MySQL
+- Pure CSS Framework
