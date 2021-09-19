@@ -1,12 +1,43 @@
 @import 'reset.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+html {
+    font-family: 'Roboto', sans-serif;
+    background-color: #24272B;
+    color: #F7F4F3;
+}
+
+/*******************************/
+/*Header Text*******************/
+/*******************************/
+header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 4em;
+    text-align: center;
+}
+h1 {
+    font-size: 3em;
+    font-weight: bolder;
+}
+h3 {
+    font-size: 1.5em;
+}
+header > * {
+    padding: 0.2em;
+}
+
+/*******************************/
+/*grid boxes formats************/
+/*******************************/
 .pure-g, .pure-u{
     letter-spacing: normal;
 }
-main {
-    margin: 10em;
+.gridCont {
+    margin: 10%;
+    margin-top: 2.5%;
 }
-
 /*the boxes themselves*/
 .l-box {
     border: 1px solid rgba(65, 61, 61, 0.2);
@@ -21,6 +52,10 @@ div.l-box > div.pure-g {
     justify-content: space-evenly;
 }
 
+/*******************************/
+/*The Temperature boxes*********/
+/*******************************/
+/*text inside the boxes*/
 .temp, .hum {
     font-size: 4.2em;
 }
@@ -29,10 +64,10 @@ div.l-box > div.pure-g {
 }
 .boxTitle {
     display: block;
-    font-size: 3em;
+    font-size: 2.5em;
     text-align: center;
     padding: 0 0.5em 0.5em 0.5em;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 /*'humidity' and 'temperature' text*/
@@ -41,8 +76,29 @@ span.unitText {
     width: 7em;
     text-align: right;
 }
-
 /*the div containing the temp and unit. e.g. 23°C or 45%*/
 div.l-box > div.pure-g > div.pure-u-2 > div.pure-g > div.pure-u-2{
 width: 8.5em;
+}
+
+
+/*******************************/
+/*The Google map****************/
+/*******************************/
+
+/*this is the box holding the map*/
+.gridCont > div:nth-child(2) > div.l-box {
+    width: 100%;
+    height: 80%;
+}
+.googleMap {
+	overflow: hidden;
+	padding-bottom: 75%; /*aspect ratio */
+	position: relative;
+}
+
+.googleMap > iframe {
+	height: 100%;
+	position: absolute;
+	width: 100%;
 }
