@@ -1,0 +1,9 @@
+# Pi documentation 
+After having to rebuild the Rpi with little documentation. This might help 
+
+### Pips
+pip install adafruit-blinka pytz mysql-connector
+
+
+### Cronjob
+*/15 * * * * /usr/bin/python /home/pi/bme280_Script.py
