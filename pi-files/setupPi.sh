@@ -53,14 +53,39 @@ fi
 # Install pip packages #
 ########################
 
-apt install -y python3-pip
 
-pip install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
 
 #match the first number after Python
 pythonVersion=$(python -V | grep -Po '(?<=Python )(.)')
 
+#install pip and its packages
+#this way of doing it is an easy work around incase stock python version is 2.7
 if [[ $pythonVersion -eq 3 ]]
 then 
-    echo "python3"
+  apt install -y python-pip  
+  pip install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
+
+  cronString = "*/15 * * * * /usr/bin/python /home/pi/bme280_Script.py"
+else
+  apt install -y python3-pip  
+  pip3 install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
+
+  cronString = "*/15 * * * * /usr/bin/python3 /home/pi/bme280_Script.py"
 fi
+
+
+##################
+# Modify Crontab #
+##################
+
+https://stackoverflow.com/a/878647
+#output the current crontab
+crontab -l > tempCron
+
+#echo new job into cron file
+echo $cronString >> tempCron
+
+#install new cron file
+crontab tempCron
+
+rm tempCron
