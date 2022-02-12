@@ -1,5 +1,8 @@
 #! /bin/bash
 
+#this script sets up the pi to start submitting temp data to the DB.
+
+
 
 #Some code taken from https://www.uugear.com/portfolio/a-single-script-to-setup-i2c-on-your-raspberry-pi/
 if [ "$(id -u)" != 0 ]; then
@@ -52,7 +55,14 @@ fi
 ########################
 # Install pip packages #
 ########################
-echo '>>> Install Packages'
+##################
+# Modify Crontab #
+##################
+echo '>>> Install Packages and Modify Crontab'
+
+#output the current crontab into temp file
+sudo -u pi crontab -l > tempCron
+
 
 
 #match the first number after Python
@@ -67,7 +77,9 @@ then
   apt install -y python-pip  
   pip install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
 
-  cronString = "*/15 * * * * /usr/bin/python /home/pi/bme280_Script.py"
+  #echo new job into cron file
+  echo "*/15 * * * * /usr/bin/python /home/pi/bme280_Script.py" >> tempCron
+
 else
   echo "default python is python2"
   echo "Installing python3"
@@ -75,23 +87,14 @@ else
   apt install -y python3-pip  
   pip3 install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
 
-  cronString = "*/15 * * * * /usr/bin/python3 /home/pi/bme280_Script.py"
+  #echo new job into cron file
+  echo "*/15 * * * * /usr/bin/python3 /home/pi/bme280_Script.py" >> tempCron
 fi
 
 
-##################
-# Modify Crontab #
-##################
-echo '>>> Modify Crontab'
-
-https://stackoverflow.com/a/878647
-#output the current crontab
-crontab -l > tempCron
-
-#echo new job into cron file
-echo $cronString >> tempCron
+echo '>>> Install New Crontab'
 
 #install new cron file
-crontab tempCron
+sudo -u pi crontab tempCron
 
 rm tempCron
