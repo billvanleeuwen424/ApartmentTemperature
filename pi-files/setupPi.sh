@@ -52,7 +52,7 @@ fi
 ########################
 # Install pip packages #
 ########################
-
+echo '>>> Install Packages'
 
 
 #match the first number after Python
@@ -62,11 +62,16 @@ pythonVersion=$(python -V | grep -Po '(?<=Python )(.)')
 #this way of doing it is an easy work around incase stock python version is 2.7
 if [[ $pythonVersion -eq 3 ]]
 then 
+  echo "default python is python3"
+
   apt install -y python-pip  
   pip install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
 
   cronString = "*/15 * * * * /usr/bin/python /home/pi/bme280_Script.py"
 else
+  echo "default python is python2"
+  echo "Installing python3"
+
   apt install -y python3-pip  
   pip3 install adafruit-blinka pytz mysql-connector adafruit-circuitpython-bme280
 
@@ -77,6 +82,7 @@ fi
 ##################
 # Modify Crontab #
 ##################
+echo '>>> Modify Crontab'
 
 https://stackoverflow.com/a/878647
 #output the current crontab
