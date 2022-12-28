@@ -1,5 +1,7 @@
 # My Apartment Temperature Project
 
+https://billvanleeuwen.ca/temperature/
+
 ## Intro
 This is one of my first ever side projects. for as long as I can remember I have been interested in Raspberry Pi's. I enjoy building programs to interface between the real and digital worlds; this project is no exception.
 
